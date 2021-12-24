@@ -140,6 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GeneSimulator.cpp" />
+    <ClCompile Include="grid.cpp" />
+    <ClCompile Include="individual.cpp" />
+    <ClCompile Include="population.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="grid.h" />
+    <ClInclude Include="individual.h" />
+    <ClInclude Include="population.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
