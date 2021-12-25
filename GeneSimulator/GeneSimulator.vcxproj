@@ -143,13 +143,18 @@
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="individual.cpp" />
+    <ClCompile Include="neuralnet.cpp" />
     <ClCompile Include="population.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="individual.h" />
+    <ClInclude Include="neuralnet.h" />
     <ClInclude Include="population.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="config.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
