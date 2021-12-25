@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GeneSimulator.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="individual.cpp" />
     <ClCompile Include="population.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="individual.h" />
     <ClInclude Include="population.h" />

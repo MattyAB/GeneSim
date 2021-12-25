@@ -1,13 +1,14 @@
 #pragma once
 
 #include "individual.h"
+#include <vector>
 
 class Population {
 private:
-	const uint16_t size;
-	Individual* population;
+//	const uint16_t size;
+	std::vector<Individual> population;
 
 public:
-	Population(uint16_t size);
+	Population();
 	void PopulateRand();
 };

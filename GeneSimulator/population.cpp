@@ -1,13 +1,22 @@
 #include "population.h"
+#include "globals.h"
+#include "random.cpp"
 
-Population::Population(uint16_t size) : size(size) {
-	this->population = new Individual[size];
+Population::Population() {
+	this->population.reserve(_populationsize_);
 }
 
 void Population::PopulateRand() {
-	uint32_t* genome = { 0x00000000 };
-	for (int i = 0; i < this->size; i++)
+	std::cout << "Generating population of size " << _populationsize_ << " with genenome length " << _genomesize_ << "...";
+
+	for (uint16_t i = 0; i < _populationsize_; i++)
 	{
-		Individual member = Individual(i, genome, 1, 0, 0);
+		uint32_t* genome = new uint32_t[_genomesize_];
+		ArrayRandom(genome, _genomesize_);
+		uint16_t x = RandInt16() % _boardsize_;
+		uint16_t y = RandInt16() % _boardsize_;
+		this->population.push_back({ i, genome, 1, x, y });
 	}
+
+	std::cout << " Finished!\n";
 }

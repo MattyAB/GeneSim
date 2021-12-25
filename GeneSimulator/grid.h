@@ -2,11 +2,13 @@
 
 #include "population.h"
 
+#include "globals.h"
+
 class Grid {
 private:
 	uint16_t* grid;
 	Population population;
 
 public:
-	Grid(uint16_t size, Population &population);
+	Grid(Population &population);
 };

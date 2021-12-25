@@ -2,6 +2,6 @@
 
 #include <cstdint>
 
-Grid::Grid(uint16_t size, Population &pop) : population(pop) {
-	this->grid = new uint16_t[size * size];
+Grid::Grid(Population &pop) : population(pop) {
+	this->grid = new uint16_t[_boardsize_ * _boardsize_];
 }
