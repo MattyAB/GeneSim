@@ -11,4 +11,6 @@ private:
 public:
 	Population();
 	void PopulateRand();
+	void StorePopulation();
+	void LoadPopulation();
 };

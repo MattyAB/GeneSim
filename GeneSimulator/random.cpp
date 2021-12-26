@@ -23,10 +23,14 @@ uint16_t RandInt16()
 	return value;
 }
 
-void ArrayRandom(uint32_t* arrayptr, uint16_t length)
+void SeedRandom()
 {
 	std::time_t t = std::time(0);
 	srand(t); // seed random number generator with our time - so that we don't get the same population every time!
+}
+
+void ArrayRandom(uint32_t* arrayptr, uint16_t length)
+{
 	for (uint16_t i = 0; i < length; i++)
 	{
 		RandInt(&arrayptr[i]);

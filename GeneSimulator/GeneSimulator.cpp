@@ -30,9 +30,13 @@ int main(int argc, char **args)
             _hiddenneurons_ = (uint16_t)std::stoi(value);
         else if (key == "outputneurons")
             _outputneurons_ = (uint16_t)std::stoi(value);
+        else if (key == "populationstorage")
+            _populationstorage_ = value;
     }
 
     Population pop = Population();
-    pop.PopulateRand();
+    //pop.PopulateRand();
+    pop.LoadPopulation();
     Grid grid = Grid(pop);
+    pop.StorePopulation();
 }

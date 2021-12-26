@@ -4,3 +4,5 @@ boardsize=256
 inputneurons=24
 hiddenneurons=10
 outputneurons=24
+
+populationstorage=C:\Users\matth\OneDrive\Code\C++\GeneSimulator\GeneSimulator\genes.txt

@@ -7,3 +7,5 @@ uint16_t _boardsize_;
 unsigned char _inputneurons_;
 unsigned char _hiddenneurons_;
 unsigned char _outputneurons_;
+
+std::string _populationstorage_;
