@@ -7,6 +7,8 @@ struct Connection {
 public:
 	unsigned char inputnode;
 	unsigned char outputnode;
+	unsigned char inputlayer;
+	unsigned char outputlayer;
 	float weight;
 };
 

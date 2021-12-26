@@ -1,0 +1,6 @@
+populationsize=1024
+genomesize=24
+boardsize=256
+inputneurons=24
+hiddenneurons=10
+outputneurons=24
