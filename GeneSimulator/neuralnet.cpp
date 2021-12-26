@@ -1,5 +1,6 @@
 #include "neuralnet.h"
 #include <iostream>
+#include <math.h>
 
 NeuralNet::NeuralNet(uint32_t* genome) 
 {
@@ -18,12 +19,12 @@ NeuralNet::NeuralNet(uint32_t* genome)
 			if (outputloc < _hiddenneurons_)
 			{
 				connection.outputlayer = 1;
-				connection.outputnode = inputloc;
+				connection.outputnode = outputloc;
 			}
 			else
 			{
 				connection.outputlayer = 2;
-				connection.outputnode = inputloc - _hiddenneurons_;
+				connection.outputnode = outputloc - _hiddenneurons_;
 			}
 		}
 		else
@@ -41,4 +42,62 @@ NeuralNet::NeuralNet(uint32_t* genome)
 			connection.weight = -(float)(genome[i] & 0x7fff) / (float)(1 << 13);
 		this->connections.push_back(connection);
 	}
+
+	std::vector<float> input;
+	input.reserve(_inputneurons_);
+	for (int i = 0; i < _inputneurons_; i++)
+		input.emplace_back(i);
+
+	Feedforward(input);
+}
+
+std::vector<float> NeuralNet::Feedforward(std::vector<float> input)
+{
+	std::vector<float> hidden;
+	std::vector<float> hiddentanh;
+	std::vector<float> output;
+	std::vector<float> outputtanh;
+	hidden.reserve(_hiddenneurons_);
+	hiddentanh.reserve(_hiddenneurons_);
+	output.reserve(_outputneurons_);
+	outputtanh.reserve(_outputneurons_);
+
+	for (int i = 0; i < _hiddenneurons_; i++)
+	{
+		hidden.emplace_back(0);
+		hiddentanh.emplace_back(0);
+	}
+	for (int i = 0; i < _outputneurons_; i++)
+	{
+		output.emplace_back(0);
+		outputtanh.emplace_back(0);
+	}
+
+	for (int i = 0; i < connections.size(); i++)
+	{
+		if (connections[i].outputlayer == 1)
+		{
+			hidden[connections[i].outputnode] = hidden[connections[i].outputnode] + connections[i].weight * input[connections[i].inputnode];
+		}
+	}
+
+	for (int i = 0; i < _hiddenneurons_; i++)
+		hiddentanh[i] = tanh(hidden[i]);
+
+	for (int i = 0; i < connections.size(); i++)
+	{
+		if (connections[i].inputlayer == 0)
+		{
+			output[connections[i].outputnode] = output[connections[i].outputnode] + connections[i].weight * input[connections[i].inputnode];
+		}
+		else
+		{
+			output[connections[i].outputnode] = output[connections[i].outputnode] + connections[i].weight * hidden[connections[i].inputnode];
+		}
+	}
+
+	for (int i = 0; i < _outputneurons_; i++)
+		outputtanh[i] = tanh(output[i]);
+
+	return outputtanh;
 }
