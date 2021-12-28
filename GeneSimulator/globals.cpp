@@ -9,3 +9,6 @@ unsigned char _hiddenneurons_;
 unsigned char _outputneurons_;
 
 std::string _populationstorage_;
+
+std::string _renderloc_;
+int _renderscale_;

@@ -10,3 +10,6 @@ extern unsigned char _hiddenneurons_;
 extern unsigned char _outputneurons_;
 
 extern std::string _populationstorage_;
+
+extern std::string _renderloc_;
+extern int _renderscale_;

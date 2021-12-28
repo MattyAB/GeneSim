@@ -13,4 +13,5 @@ public:
 	void PopulateRand();
 	void StorePopulation();
 	void LoadPopulation();
+	std::vector<IndivDrawData> GetFrameData();
 };

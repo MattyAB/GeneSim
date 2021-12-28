@@ -6,11 +6,27 @@
 #include <fstream>
 #include <sstream>
 
-Population::Population() {
+Population::Population() 
+{
 	this->population.reserve(_populationsize_);
 }
 
-void Population::PopulateRand() {
+std::vector<IndivDrawData> Population::GetFrameData()
+{
+	std::vector<IndivDrawData> framedata;
+	framedata.reserve(_populationsize_);
+
+	for (Individual indiv : population)
+	{
+		framedata.push_back({ indiv.x, indiv.y, { 0xff, 0, 0 } });
+	}
+
+	return framedata;
+
+}
+
+void Population::PopulateRand() 
+{
 	std::cout << "Generating population of size " << _populationsize_ << " with genenome length " << _genomesize_ << "...";
 
 	SeedRandom();

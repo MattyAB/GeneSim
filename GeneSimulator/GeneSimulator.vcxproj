@@ -145,13 +145,16 @@
     <ClCompile Include="individual.cpp" />
     <ClCompile Include="neuralnet.cpp" />
     <ClCompile Include="population.cpp" />
+    <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CImg.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="individual.h" />
     <ClInclude Include="neuralnet.h" />
     <ClInclude Include="population.h" />
+    <ClInclude Include="render.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="config.txt" />

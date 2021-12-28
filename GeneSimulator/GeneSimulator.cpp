@@ -6,6 +6,7 @@
 #include "grid.h"
 #include "population.h"
 #include "globals.h"
+#include "render.h"
 
 const char config[] = "C:\\Users\\matth\\OneDrive\\Code\\C++\\GeneSimulator\\GeneSimulator\\config.txt";
 
@@ -32,11 +33,17 @@ int main(int argc, char **args)
             _outputneurons_ = (uint16_t)std::stoi(value);
         else if (key == "populationstorage")
             _populationstorage_ = value;
+        else if (key == "renderscale")
+            _renderscale_ = (uint16_t)std::stoi(value);
     }
 
     Population pop = Population();
-    //pop.PopulateRand();
-    pop.LoadPopulation();
+    pop.PopulateRand();
+    //pop.LoadPopulation();
     Grid grid = Grid(pop);
+
+    Render render = Render();
+    render.DrawFrame({ pop.GetFrameData() });
+
     pop.StorePopulation();
 }
