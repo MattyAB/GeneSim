@@ -1,11 +1,9 @@
 #include "render.h"
 
-#include "CImg.h"
-using namespace cimg_library;
 
 Render::Render()
 {
-
+	this->imageList.clear();
 }
 
 void Render::DrawFrame(FrameData data)
@@ -22,5 +20,14 @@ void Render::DrawFrame(FrameData data)
 
 	// For some reason it takes issue with png. Let's use bmp for now
 	//image.save_png(filename.c_str(), 3);
-	image.save(filename.c_str());
+	//image.save(filename.c_str());
+
+	imageList.push_back(image);
+}
+
+void Render::SaveVideo()
+{
+	std::string filename = "video.mp4";
+
+	imageList.save_video(filename.c_str(), 25, "H264");
 }

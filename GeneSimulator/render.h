@@ -3,6 +3,9 @@
 #include <vector>
 #include "globals.h"
 
+#include "CImg.h"
+using namespace cimg_library;
+
 struct IndivDrawData {
 	uint16_t x;
 	uint16_t y;
@@ -15,8 +18,9 @@ struct FrameData {
 
 class Render {
 private:
-	
+	cimg_library::CImgList<uint8_t> imageList;
 public:
 	Render();
 	void DrawFrame(FrameData data);
+	void SaveVideo();
 };

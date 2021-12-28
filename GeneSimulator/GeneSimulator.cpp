@@ -43,7 +43,13 @@ int main(int argc, char **args)
     Grid grid = Grid(pop);
 
     Render render = Render();
-    render.DrawFrame({ pop.GetFrameData() });
+    for (int i = 0; i < 10; i++) 
+    {
+        render.DrawFrame({ pop.GetFrameData() });
+        pop.TempPopulationMove();
+    }
+
+    render.SaveVideo();
 
     pop.StorePopulation();
 }

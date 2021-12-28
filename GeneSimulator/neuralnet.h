@@ -19,4 +19,6 @@ private:
 public:
 	NeuralNet(uint32_t* genome);
 	std::vector<float> Feedforward(std::vector<float> input);
+
+	uint8_t* GetColour();
 };

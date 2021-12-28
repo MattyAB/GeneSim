@@ -6,6 +6,16 @@
 #include <fstream>
 #include <sstream>
 
+// TEMP: Just to check our video rendering works okay.
+void Population::TempPopulationMove()
+{
+	for (int i = 0; i < _populationsize_; i++)
+		if (i % 2 == 0)
+			population[i].x += 1;
+		else
+			population[i].x -= 1;
+}
+
 Population::Population() 
 {
 	this->population.reserve(_populationsize_);
@@ -18,7 +28,7 @@ std::vector<IndivDrawData> Population::GetFrameData()
 
 	for (Individual indiv : population)
 	{
-		framedata.push_back({ indiv.x, indiv.y, { 0xff, 0, 0 } });
+		framedata.push_back(indiv.GetDrawData());
 	}
 
 	return framedata;

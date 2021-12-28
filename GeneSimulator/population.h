@@ -14,4 +14,6 @@ public:
 	void StorePopulation();
 	void LoadPopulation();
 	std::vector<IndivDrawData> GetFrameData();
+
+	void TempPopulationMove();
 };

@@ -101,3 +101,12 @@ std::vector<float> NeuralNet::Feedforward(std::vector<float> input)
 
 	return outputtanh;
 }
+
+uint8_t* NeuralNet::GetColour()
+{
+	uint8_t col[3];
+	col[0] = static_cast<uint8_t>((connections[0].weight + 4) * 32);
+	col[1] = static_cast<uint8_t>((connections[1].weight + 4) * 32);
+	col[2] = static_cast<uint8_t>((connections[2].weight + 4) * 32);
+	return col;
+}
