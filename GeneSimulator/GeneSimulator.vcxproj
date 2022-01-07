@@ -145,6 +145,7 @@
     <ClCompile Include="individual.cpp" />
     <ClCompile Include="neuralnet.cpp" />
     <ClCompile Include="population.cpp" />
+    <ClCompile Include="random.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="simulator.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="individual.h" />
     <ClInclude Include="neuralnet.h" />
     <ClInclude Include="population.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="simulator.h" />
   </ItemGroup>

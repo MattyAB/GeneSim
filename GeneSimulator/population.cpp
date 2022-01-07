@@ -1,6 +1,6 @@
 #include "population.h"
 #include "globals.h"
-#include "random.cpp"
+#include "random.h"
 
 #include <iostream>
 #include <fstream>
@@ -9,11 +9,70 @@
 // TEMP: Just to check our video rendering works okay.
 void Population::Tick()
 {
+	std::vector<std::vector<float>> outputs = std::vector<std::vector<float>>();
+	outputs.reserve(_populationsize_);
 	for (int i = 0; i < _populationsize_; i++)
-		if (i % 2 == 0)
-			population[i].x += 1;
-		else
-			population[i].x -= 1;
+	{
+		std::vector<float> input = GetIndivSensoryNeurons(i);
+		outputs.push_back(population[i].Feedforward(input));
+	}
+
+	for (int i = 0; i < _populationsize_; i++)
+	{
+		PushIndivMotorNeurons(i, outputs[i]);
+	}
+}
+
+std::vector<float> Population::GetIndivSensoryNeurons(int indiv)
+{
+	std::vector<float> inputs = std::vector<float>();
+	inputs.reserve(_inputneurons_);
+
+	// 1 neuron
+	inputs.push_back(1.0f);
+
+	for (int i = 0; i < _inputneurons_ - 1; i++) 
+	{
+		inputs.push_back(0.0f);
+	}
+
+	return inputs;
+}
+
+// WHY IS THIS SIZE 48???
+
+void Population::PushIndivMotorNeurons(int indiv, std::vector<float> neurondata)
+{
+	// Step forward neuron
+	if (neurondata[0] >= 0.5)
+	{
+		uint16_t newx = population[indiv].x;
+		uint16_t newy = population[indiv].y;
+
+		if (population[indiv].direction == 0)
+			newx += 1;
+		if (population[indiv].direction == 1)
+			newx -= 1;
+		if (population[indiv].direction == 2)
+			newy += 1;
+		if (population[indiv].direction == 3)
+			newy -= 1;
+
+		if (!IndivAtLocation(newx, newy))
+		{
+			population[indiv].SetLocation(newx, newy);
+		}
+	}
+}
+
+bool Population::IndivAtLocation(uint16_t x, uint16_t y)
+{
+	for (int i = 0; i < _populationsize_; i++)
+	{
+		if (population[i].x == x && population[i].y == y)
+			return true;
+	}
+	return false;
 }
 
 Population::Population() 

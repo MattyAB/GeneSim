@@ -23,6 +23,11 @@ uint16_t RandInt16()
 	return value;
 }
 
+uint8_t RandomTwoBit()
+{
+	return (uint8_t)rand() % 4;
+}
+
 void SeedRandom()
 {
 	std::time_t t = std::time(0);
