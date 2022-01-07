@@ -31,15 +31,35 @@ std::vector<float> Population::GetIndivSensoryNeurons(int indiv)
 	// 1 neuron
 	inputs.push_back(1.0f);
 
-	for (int i = 0; i < _inputneurons_ - 1; i++) 
+	// Direction up/down neuron and left/right neuron
+	if (population[indiv].direction == 0) // right
+	{
+		inputs.push_back(0.0f);
+		inputs.push_back(1.0f);
+	}
+	if (population[indiv].direction == 1) // up
+	{
+		inputs.push_back(1.0f);
+		inputs.push_back(0.0f);
+	}
+	if (population[indiv].direction == 2) // left
+	{
+		inputs.push_back(0.0f);
+		inputs.push_back(-1.0f);
+	}
+	if (population[indiv].direction == 3) // down
+	{
+		inputs.push_back(-1.0f);
+		inputs.push_back(0.0f);
+	}
+
+	for (int i = 0; i < _inputneurons_ - 3; i++) 
 	{
 		inputs.push_back(0.0f);
 	}
 
 	return inputs;
 }
-
-// WHY IS THIS SIZE 48???
 
 void Population::PushIndivMotorNeurons(int indiv, std::vector<float> neurondata)
 {
@@ -49,19 +69,29 @@ void Population::PushIndivMotorNeurons(int indiv, std::vector<float> neurondata)
 		uint16_t newx = population[indiv].x;
 		uint16_t newy = population[indiv].y;
 
-		if (population[indiv].direction == 0)
+		if (population[indiv].direction == 0) // right
 			newx += 1;
-		if (population[indiv].direction == 1)
-			newx -= 1;
-		if (population[indiv].direction == 2)
+		if (population[indiv].direction == 1) // up
 			newy += 1;
-		if (population[indiv].direction == 3)
+		if (population[indiv].direction == 2) // left
+			newx -= 1;
+		if (population[indiv].direction == 3) // down
 			newy -= 1;
 
 		if (!IndivAtLocation(newx, newy))
 		{
 			population[indiv].SetLocation(newx, newy);
 		}
+	}
+
+	// Rotate neuron
+	if (neurondata[1] >= 0.75) // Tanh means that this is hit when the raw output value is > 1
+	{
+		population[indiv].direction = (population[indiv].direction + 1) % 4;
+	}
+	if (neurondata[1] <= 0.25) // Tanh means that this is hit when the raw output value is < -1
+	{
+		population[indiv].direction = (uint8_t)(population[indiv].direction - 1) % 4;
 	}
 }
 
