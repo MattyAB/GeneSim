@@ -15,5 +15,5 @@ public:
 	void LoadPopulation();
 	std::vector<IndivDrawData> GetFrameData();
 
-	void TempPopulationMove();
+	void Tick();
 };

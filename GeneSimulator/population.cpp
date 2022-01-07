@@ -7,7 +7,7 @@
 #include <sstream>
 
 // TEMP: Just to check our video rendering works okay.
-void Population::TempPopulationMove()
+void Population::Tick()
 {
 	for (int i = 0; i < _populationsize_; i++)
 		if (i % 2 == 0)

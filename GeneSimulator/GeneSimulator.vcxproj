@@ -146,6 +146,7 @@
     <ClCompile Include="neuralnet.cpp" />
     <ClCompile Include="population.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="simulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CImg.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="neuralnet.h" />
     <ClInclude Include="population.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="simulator.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="config.txt" />

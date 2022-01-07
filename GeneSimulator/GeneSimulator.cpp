@@ -7,6 +7,7 @@
 #include "population.h"
 #include "globals.h"
 #include "render.h"
+#include "simulator.h"
 
 const char config[] = "C:\\Users\\matth\\OneDrive\\Code\\C++\\GeneSimulator\\GeneSimulator\\config.txt";
 
@@ -40,14 +41,11 @@ int main(int argc, char **args)
     Population pop = Population();
     pop.PopulateRand();
     //pop.LoadPopulation();
-    Grid grid = Grid(pop);
+
 
     Render render = Render();
-    for (int i = 0; i < 10; i++) 
-    {
-        render.DrawFrame({ pop.GetFrameData() });
-        pop.TempPopulationMove();
-    }
+    Simulator simulation = Simulator(pop, render);
+    simulation.Simulate(100);
 
     render.SaveVideo();
 

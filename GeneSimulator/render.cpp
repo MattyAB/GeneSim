@@ -1,4 +1,5 @@
 #include "render.h"
+#include <iostream>
 
 
 Render::Render()
@@ -29,5 +30,7 @@ void Render::SaveVideo()
 {
 	std::string filename = "video.mp4";
 
+	std::cout << "Writing video to file " << filename << " ... ";
 	imageList.save_video(filename.c_str(), 25, "H264");
+	std::cout << "Done!\n";
 }
