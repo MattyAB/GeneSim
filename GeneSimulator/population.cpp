@@ -1,6 +1,7 @@
 #include "population.h"
 #include "globals.h"
 #include "random.h"
+#include "mutator.h"
 
 #include <iostream>
 #include <fstream>
@@ -69,13 +70,13 @@ void Population::PushIndivMotorNeurons(int indiv, std::vector<float> neurondata)
 		uint16_t newx = population[indiv].x;
 		uint16_t newy = population[indiv].y;
 
-		if (population[indiv].direction == 0) // right
+		if (population[indiv].direction == 0 && population[indiv].x < _boardsize_) // right
 			newx += 1;
-		if (population[indiv].direction == 1) // up
+		if (population[indiv].direction == 1 && population[indiv].x > 0) // up
 			newy += 1;
-		if (population[indiv].direction == 2) // left
+		if (population[indiv].direction == 2 && population[indiv].x > 0) // left
 			newx -= 1;
-		if (population[indiv].direction == 3) // down
+		if (population[indiv].direction == 3 && population[indiv].x < _boardsize_) // down
 			newy -= 1;
 
 		if (!IndivAtLocation(newx, newy))
@@ -103,6 +104,48 @@ bool Population::IndivAtLocation(uint16_t x, uint16_t y)
 			return true;
 	}
 	return false;
+}
+
+Population::Population(std::vector<Individual> individuals)
+{
+	Mutator mutator = Mutator();
+
+	this->population.reserve(_populationsize_);
+
+	for (uint16_t i = 0; i < _populationsize_; i++) // Each new member
+	{
+		int parent1 = RandInt16() % individuals.size();
+		int parent2 = RandInt16() % individuals.size();
+
+		int counter = 16; // Counts how many times we have used this integer. If we have used this integer 15 times we pick a new one.
+		uint16_t seed = 0;
+
+		uint32_t* newgenome = new uint32_t[_genomesize_];
+
+		for (int j = 0; j < _genomesize_; j++) // For each gene of the new member
+		{
+			if (counter == 16)
+			{
+				seed = RandInt16();
+				counter = 0;
+			}
+
+			auto test = seed % 2 == 0;
+
+			uint32_t newgene = (seed % 2 == 0) ? individuals[parent1].genome[j] : individuals[parent2].genome[j];
+			seed = seed >> 1;
+
+			mutator.MutateGene(&newgene);
+
+			newgenome[j] = newgene;
+
+			counter++;
+		}
+
+		uint16_t x = RandInt16() % _boardsize_;
+		uint16_t y = RandInt16() % _boardsize_;
+		this->population.push_back({ i, newgenome, x, y });
+	}
 }
 
 Population::Population() 
@@ -186,4 +229,9 @@ void Population::LoadPopulation()
 	}
 
 	FileRead.close();
+}
+
+Individual Population::GetIndiv(int i)
+{
+	return population[i];
 }

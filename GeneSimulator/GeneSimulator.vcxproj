@@ -143,6 +143,7 @@
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="individual.cpp" />
+    <ClCompile Include="mutator.cpp" />
     <ClCompile Include="neuralnet.cpp" />
     <ClCompile Include="population.cpp" />
     <ClCompile Include="random.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="individual.h" />
+    <ClInclude Include="mutator.h" />
     <ClInclude Include="neuralnet.h" />
     <ClInclude Include="population.h" />
     <ClInclude Include="random.h" />

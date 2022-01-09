@@ -36,16 +36,31 @@ int main(int argc, char **args)
             _populationstorage_ = value;
         else if (key == "renderscale")
             _renderscale_ = (uint16_t)std::stoi(value);
+        else if (key == "mutationrate")
+            _mutationrate_ = (uint16_t)std::stoi(value);
     }
 
     Population pop = Population();
     pop.PopulateRand();
     //pop.LoadPopulation();
 
-
     Render render = Render();
+
+    for (int i = 0; i < 100; i++)
+    {
+
+        Simulator simulation = Simulator(pop, render);
+        simulation.Simulate(300, false);
+
+        std::vector<Individual> survivors = simulation.GetSurvivors(0);
+
+        pop = Population(survivors);
+        
+        std::cout << "Simulated round " << i << " with " << survivors.size() << " survivors\n";
+    }
+
     Simulator simulation = Simulator(pop, render);
-    simulation.Simulate(100);
+    simulation.Simulate(300, true);
 
     render.SaveVideo();
 

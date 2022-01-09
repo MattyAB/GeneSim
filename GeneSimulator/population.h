@@ -13,10 +13,13 @@ private:
 
 public:
 	Population();
+	Population(std::vector<Individual> previouspopulation);
 	void PopulateRand();
 	void StorePopulation();
 	void LoadPopulation();
 	std::vector<IndivDrawData> GetFrameData();
+
+	Individual GetIndiv(int i);
 
 	void Tick();
 };
