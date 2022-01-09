@@ -33,6 +33,17 @@ std::vector<Individual> Simulator::GetSurvivors(int survivalcondition)
 			}
 		}
 	}
+	else if (survivalcondition == 1)
+	{
+		for (int i = 0; i < _populationsize_; i++)
+		{
+			Individual indiv = pop.GetIndiv(i);
+			if (indiv.x < (_boardsize_ / 2) && indiv.y < (_boardsize_ / 2))
+			{
+				output.push_back(indiv);
+			}
+		}
+	}
 	else
 	{
 		throw std::invalid_argument("No such survivalcondition");

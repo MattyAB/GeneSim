@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <string>
+#include <format>
+#include <sstream>
 
 #include "grid.h"
 #include "population.h"
@@ -41,28 +43,37 @@ int main(int argc, char **args)
     }
 
     Population pop = Population();
-    pop.PopulateRand();
-    //pop.LoadPopulation();
+    //pop.PopulateRand();
+    pop.LoadPopulation();
 
     Render render = Render();
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i <= 1000; i++)
     {
 
         Simulator simulation = Simulator(pop, render);
-        simulation.Simulate(300, false);
+        if (i % 100 == 0)
+        {
+            simulation.Simulate(300, true);
 
-        std::vector<Individual> survivors = simulation.GetSurvivors(0);
+            std::stringstream stream;
+            stream << "population_";
+            stream << i;
+            stream << ".mp4";
+            render.SaveVideo(stream.str());
+        }
+        else
+            simulation.Simulate(300, false);
+
+        std::vector<Individual> survivors = simulation.GetSurvivors(1);
 
         pop = Population(survivors);
         
         std::cout << "Simulated round " << i << " with " << survivors.size() << " survivors\n";
+
+        pop.StorePopulation();
     }
 
     Simulator simulation = Simulator(pop, render);
     simulation.Simulate(300, true);
-
-    render.SaveVideo();
-
-    pop.StorePopulation();
 }

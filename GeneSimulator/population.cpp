@@ -72,12 +72,12 @@ void Population::PushIndivMotorNeurons(int indiv, std::vector<float> neurondata)
 
 		if (population[indiv].direction == 0 && population[indiv].x < _boardsize_) // right
 			newx += 1;
-		if (population[indiv].direction == 1 && population[indiv].x > 0) // up
-			newy += 1;
+		if (population[indiv].direction == 1 && population[indiv].y > 0) // up
+			newy -= 1;
 		if (population[indiv].direction == 2 && population[indiv].x > 0) // left
 			newx -= 1;
-		if (population[indiv].direction == 3 && population[indiv].x < _boardsize_) // down
-			newy -= 1;
+		if (population[indiv].direction == 3 && population[indiv].y < _boardsize_) // down
+			newy += 1;
 
 		if (!IndivAtLocation(newx, newy))
 		{

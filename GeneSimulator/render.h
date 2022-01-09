@@ -22,5 +22,6 @@ private:
 public:
 	Render();
 	void DrawFrame(FrameData data);
-	void SaveVideo();
+	void SaveVideo(std::string filename);
+	void ClearFrameBuffer();
 };
